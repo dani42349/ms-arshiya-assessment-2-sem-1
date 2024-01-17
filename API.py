@@ -7,20 +7,20 @@ class CountryInfoApp:
         self.root = root
         self.root.title("Country Information App")
 
-        # Create a dictionary to store information for multiple pages
+        
         self.pages = {}
 
-        # Create and set up frames for different pages
+        
         self.create_search_page()
         self.create_instructions_page()
 
-        # Start with the search page
+        
         self.show_page("Search")
 
     def create_search_page(self):
         search_frame = tk.Frame(self.root)
 
-        # Entry and Button for user input
+        
         label = tk.Label(search_frame, text="Enter country name:")
         label.pack(pady=10)
 
@@ -35,7 +35,7 @@ class CountryInfoApp:
     def create_instructions_page(self):
         instructions_frame = tk.Frame(self.root)
 
-        # Instructions for the user
+        
         instructions_text = "Welcome to the Country Information App!\n\n"\
                             "1. Enter a country name and click 'Search' to get information.\n"\
                             "2. Use the 'Instructions' button to view this page.\n"\
@@ -46,11 +46,11 @@ class CountryInfoApp:
         self.pages["Instructions"] = instructions_frame
 
     def show_page(self, page_name):
-        # Hide all frames
+        
         for page in self.pages.values():
             page.pack_forget()
 
-        # Show the selected frame
+        
         self.pages[page_name].pack()
 
     def search_country(self, country_name):
@@ -59,18 +59,18 @@ class CountryInfoApp:
             return
 
         try:
-            # Make API request to Rest Countries API
+            
             response = requests.get(f"https://restcountries.com/v3.1/name/{country_name}")
             data = response.json()
 
-            # Extract relevant information
+            
             country_data = data[0]
 
             capital = country_data['capital']
             population = country_data['population']
             languages = ', '.join(country_data['languages'].values())
 
-            # Display the information
+            
             result_text = f"Capital: {capital}\nPopulation: {population}\nLanguages: {languages}"
             messagebox.showinfo("Country Information", result_text)
 
